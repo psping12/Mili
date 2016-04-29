@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <include layout="@layout/toolbar" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:id="@+id/aty_main_contentview"
+        >
+
+    </FrameLayout>
+    
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/uiSeparator"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="0dp"
+        android:gravity="center_vertical"
+        >
+
+      <!--  <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/selector_shouye"
+            android:text="首页"
+            android:drawablePadding="3dp"
+            android:textSize="12sp"
+            />-->
+        <FrameLayout
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/aty_main_bottom_find">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="2.0dip"
+                android:drawableTop="@drawable/selector_shouye"
+                android:gravity="center"
+                android:text="首页"
+                android:textSize="9sp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/aty_main_bottom_find1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="2.0dip"
+                android:drawableTop="@drawable/selector_shouye"
+                android:gravity="center"
+                android:text="最新揭晓"
+                android:textSize="9sp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/aty_main_bottom_find2">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="2.0dip"
+                android:drawableTop="@drawable/selector_shouye"
+                android:gravity="center"
+                android:text="发现"
+                android:textSize="9sp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/aty_main_bottom_find3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="2.0dip"
+                android:drawableTop="@drawable/selector_shouye"
+                android:gravity="center"
+                android:text="我的"
+                android:textSize="9sp"
+                />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
