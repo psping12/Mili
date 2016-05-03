@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="uiSeparator">#E4E4E4</color>
-    <color name="btDuoBao">#E54047</color>
+    <color name="btDuoBao_selected">#E54047</color>
+    <color name="textBg_normal">#000</color>
 </resources>

@@ -1,10 +1,13 @@
 package com.jm.app.mili.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ScrollingView;
 import android.support.v4.view.ViewPager;
@@ -20,9 +23,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.jm.app.mili.Bean.NormalGoodsInfo;
+import com.jm.app.mili.MainActivity;
 import com.jm.app.mili.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -40,22 +45,11 @@ public class FragmentShouYe extends Fragment {
     ImageView points[];//广告圆点
     View views[];//广告视图
     int selectedItem;//广告选中item
-//    ScheduledExecutorService scheduledExecutorService;
-    Timer timer;
+    ScheduledExecutorService scheduledExecutorService;
 
     RecyclerView recyclearView;
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 1:
-                    viewpager.setCurrentItem(selectedItem+1);
-                    break;
-            }
-        }
-    };
+
 
     @Nullable
     @Override
@@ -72,16 +66,48 @@ public class FragmentShouYe extends Fragment {
     }
 
 
+    private void initView(View view){
+        ArrayList<Fragment> contentViews =new ArrayList<Fragment>();
+        FragmentGoods allGoods,tenGoods;
+        allGoods =new FragmentGoods();
+        tenGoods=new FragmentGoods();
+        contentViews.add(allGoods);
+        contentViews.add(tenGoods);
+        viewpager = (ViewPager) view.findViewById(R.id.frag_shouye_viewpager);
+        viewpager.setAdapter(new FragmentPagerada(getActivity().getSupportFragmentManager(),contentViews));
 
-    private void initView(View view) {
+    }
+
+    class FragmentPagerada extends FragmentStatePagerAdapter{
+        private ArrayList<Fragment> fragments;
+
+        public FragmentPagerada(FragmentManager fm, ArrayList<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+    }
 
 
-        ScrollView scrollView = (ScrollView) view.findViewById(R.id.frag_shouye_scrollview);
-        scrollView.smoothScrollBy(0,0);
 
-        /**
+/*    private void initView(View view) {
+
+
+//        ScrollView scrollView = (ScrollView) view.findViewById(R.id.frag_shouye_scrollview);
+//        scrollView.smoothScrollBy(0,0);
+
+        *//**
          * banner Ad
-         */
+         *//*
         viewpager = (ViewPager) view.findViewById(R.id.frag_shouye_banner_viewpager);
         lin = (LinearLayout) view.findViewById(R.id.frag_shouye_banner_lin);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -112,9 +138,9 @@ public class FragmentShouYe extends Fragment {
         viewpager.addOnPageChangeListener(pagelistener);
 
 
-        /**
+        *//**
          * goods
-         */
+         *//*
 
         ArrayList<NormalGoodsInfo> data =new ArrayList<NormalGoodsInfo>();
         for (int i=1;i<10;i++){
@@ -132,9 +158,9 @@ public class FragmentShouYe extends Fragment {
 
     }
 
-    /**
+    *//**
      * 广告适配器
-     */
+     *//*
     class BannerAdAdapter extends PagerAdapter {
 
         @Override
@@ -165,9 +191,9 @@ public class FragmentShouYe extends Fragment {
         }
     }
 
-    /**
+    *//**
      * 广告监听
-     */
+     *//*
     private ViewPager.OnPageChangeListener pagelistener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -186,10 +212,10 @@ public class FragmentShouYe extends Fragment {
         }
     };
 
-    /**
+    *//**
      * 设置广告圆点
      * @param position
-     */
+     *//*
     private void setPointsBg(int position) {
         for (int i = 0; i < points.length; i++) {
             if (i == position) {
@@ -200,9 +226,9 @@ public class FragmentShouYe extends Fragment {
         }
     }
 
-    /**
+    *//**
      * 商品适配器
-     */
+     *//*
     class goodsAdapter extends RecyclerView.Adapter<goodsAdapter.mViewHolder>{
         private ArrayList<NormalGoodsInfo> data;
 
@@ -247,47 +273,45 @@ public class FragmentShouYe extends Fragment {
     }
 
 
-    /**
-     * 循环轮播
-     */
-    private void loopAd() {
-        timer=new Timer();
-
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(1);
-            }
-        },3*1000,3*1000);
-
-//        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-//        // 当Activity显示出来后，每两秒切换一次图片显示
-//        scheduledExecutorService.scheduleAtFixedRate(new adTask(), 3, 3,
-//                TimeUnit.SECONDS);
+    *//**
+     * 切换下一张广告
+     *//*
+    public void CurrentBannerItem(){
+      viewpager.setCurrentItem(selectedItem+1);
     }
-
-    class adTask implements Runnable{
-        @Override
-        public void run() {
-            handler.sendEmptyMessage(1);
-        }
-    }
-
-    private void stopAd(){
-//        scheduledExecutorService.shutdown();
-        timer.cancel();
-    }
-
 
     @Override
     public void onResume() {
         super.onResume();
-        loopAd();
+//        MainActivity.startBannerAd();
+        startBannerAd();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        stopAd();
+//        MainActivity.stopBannerAd();
+        stopBannerAd();
     }
+
+
+    *//**
+     * 开始轮询广告
+     *//*
+    public void startBannerAd(){
+        timer =new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+               handler.sendEmptyMessage(1);
+            }
+        },5*1000,3*1000);
+    }
+
+    *//**
+     * 结束轮询
+     *//*
+    public void stopBannerAd(){
+        timer.cancel();
+    }*/
 }

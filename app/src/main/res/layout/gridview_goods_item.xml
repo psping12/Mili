@@ -96,7 +96,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/btDuoBao"
+                android:background="@color/btDuoBao_selected"
                 android:layout_centerInParent="true"
                 android:text="夺宝"/>
         </RelativeLayout>
