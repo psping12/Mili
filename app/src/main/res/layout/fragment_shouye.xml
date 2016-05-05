@@ -1,41 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/frag_shouye_scrollview"
-    >
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
 
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/frag_shouye_parentview"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<com.jm.app.mili.widget.mScrollview android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frag_shouye_scrollview"
+   >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/frag_shouye_scrollview_child">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_shouye_topallandten"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#E9E9E9"
+            >
+            <TextView
+                android:id="@+id/frag_shouye_allgoods"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="全部商品"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/frag_shouye_tengoods"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10元专区" />
+        </LinearLayout>
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/frag_shouye_banner"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_weight="3">
+            android:layout_height="200dp">
+            <!--            <android.support.v4.view.ViewPager
+                            android:id="@+id/frag_shouye_banner_viewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-<!--            <android.support.v4.view.ViewPager
-                android:id="@+id/frag_shouye_banner_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                        <LinearLayout
+                            android:id="@+id/frag_shouye_banner_lin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
 
-            <LinearLayout
-                android:id="@+id/frag_shouye_banner_lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-            </LinearLayout>-->
+                        </LinearLayout>-->
             <com.jm.app.mili.widget.Banner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
             </com.jm.app.mili.widget.Banner>
         </FrameLayout>
 
@@ -56,33 +88,37 @@
                 android:drawablePadding="3dp"
                 android:drawableTop="@mipmap/tab_home_focus"
                 android:gravity="center"
+                android:id="@+id/frag_shouye_classify"
                 android:text="分类" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawablePadding="3dp"
-                android:drawableTop="@mipmap/tab_home_focus"
+                android:drawableTop="@mipmap/yiyuanbiansanshi"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
+                android:id="@+id/frag_shouye_onebecomthirty"
                 android:text="1元变30" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawablePadding="3dp"
-                android:drawableTop="@mipmap/tab_home_focus"
+                android:layout_marginTop="15dp"
+                android:drawableTop="@mipmap/miji"
                 android:gravity="center"
+                android:id="@+id/frag_shouye_cheats"
                 android:text="中奖秘籍" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawablePadding="3dp"
-                android:drawableTop="@mipmap/tab_home_focus"
+                android:layout_marginTop="15dp"
+                android:drawableTop="@mipmap/shaidan"
                 android:gravity="center"
+                android:id="@+id/frag_shouye_showorder"
                 android:text="晒单" />
         </LinearLayout>
 
@@ -113,32 +149,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#E9E9E9">
-
+            android:background="#E9E9E9"
+            android:id="@+id/frag_shouye_normalallandten"
+            >
             <TextView
+                android:id="@+id/frag_shouye_allgoods1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="全部商品"
-                android:textColor="@color/colorAccent"
-                android:id="@+id/frag_shouye_allgoods"
-                />
+                android:textColor="@color/colorAccent" />
             <TextView
+                android:id="@+id/frag_shouye_tengoods1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="10元专区"
-                android:id="@+id/frag_shouye_tengoods"
-                />
+                android:text="10元专区" />
         </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="800dp"
-        android:id="@+id/frag_shouye_viewpager"
-        >
-    </android.support.v4.view.ViewPager>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_shouye_content_goods"
+            >
+           <!-- <android.support.v4.view.ViewPager
+                android:id="@+id/frag_shouye_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>-->
+        </FrameLayout>
+    </LinearLayout>
+</com.jm.app.mili.widget.mScrollview>
 </LinearLayout>
-    </ScrollView>

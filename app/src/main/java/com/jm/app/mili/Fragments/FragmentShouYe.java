@@ -1,43 +1,35 @@
 package com.jm.app.mili.Fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ScrollingView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.jm.app.mili.Bean.NormalGoodsInfo;
-import com.jm.app.mili.MainActivity;
 import com.jm.app.mili.R;
+import com.jm.app.mili.widget.mScrollview;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2016/4/28.
  */
-public class FragmentShouYe extends Fragment {
+public class FragmentShouYe extends Fragment implements mScrollview.OnScrollListener{
     ViewPager viewpager;
     LinearLayout lin;
 
@@ -49,7 +41,15 @@ public class FragmentShouYe extends Fragment {
 
     RecyclerView recyclearView;
 
+    TextView allgoods,tengoods,allgoods1,tengoods1;//全部商品,十元专区
+    FragmentGoods allGoods,tenGoods;//全部商品,十元专区
+    TextView classify,onebecomethirty,cheats,showorder;//分类，1变30,中奖秘籍,晒单
 
+    mScrollview mscrollView;
+    LinearLayout normalalandten,parentView,childView;
+    FrameLayout topallandten;
+
+    int margintop;
 
     @Nullable
     @Override
@@ -67,16 +67,90 @@ public class FragmentShouYe extends Fragment {
 
 
     private void initView(View view){
+//        mscrollView = (mScrollview) view.findViewById(R.id.frag_shouye_scrollview);
+//        topGoodsKinds= (FrameLayout) view.findViewById(R.id.frag_shouye_xuanfu_goods);
+//        normalGoodsinds= (LinearLayout) view.findViewById(R.id.frag_shouye_xuanfu_goodsb);
+//
+//        topGoodsKinds.setVisibility(View.GONE);
+//        margintop= topGoodsKinds.getTop();
+//        mscrollView.setOnScrollListener(new mScrollview.OnScrollListener() {
+//            @Override
+//            public void onScroll(Context context, int x, int y, int oldx, int oldy) {
+//                if (y-oldy<=margintop){
+//                    topGoodsKinds.setVisibility(View.VISIBLE);
+//                }else {
+//                    topGoodsKinds.setVisibility(View.GONE);
+//                }
+//            }
+//        });
+        parentView= (LinearLayout) view.findViewById(R.id.frag_shouye_parentview);
+        childView = (LinearLayout) view.findViewById(R.id.frag_shouye_scrollview_child);
+        childView.getParent().requestDisallowInterceptTouchEvent(true);
+        topallandten= (FrameLayout) view.findViewById(R.id.frag_shouye_topallandten);
+        normalalandten= (LinearLayout) view.findViewById(R.id.frag_shouye_normalallandten);
+        mscrollView = (mScrollview) view.findViewById(R.id.frag_shouye_scrollview);
+        topallandten.setVisibility(View.GONE);
+        mscrollView.setOnScrollListener(this);
+        parentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                onScroll(mscrollView.getScrollY());
+            }
+        });
+
+        allgoods = (TextView) view.findViewById(R.id.frag_shouye_allgoods);
+        allgoods1 = (TextView) view.findViewById(R.id.frag_shouye_allgoods1);
+        tengoods = (TextView) view.findViewById(R.id.frag_shouye_tengoods);
+        tengoods1 = (TextView) view.findViewById(R.id.frag_shouye_tengoods1);
+        allgoods.setOnClickListener(goodsKindsListener);
+        allgoods1.setOnClickListener(goodsKindsListener);
+        tengoods.setOnClickListener(goodsKindsListener);
+        tengoods1.setOnClickListener(goodsKindsListener);
+
+
+        //中部导航按钮
+        classify= (TextView) view.findViewById(R.id.frag_shouye_classify);
+        onebecomethirty= (TextView) view.findViewById(R.id.frag_shouye_onebecomthirty);
+        cheats= (TextView) view.findViewById(R.id.frag_shouye_cheats);
+        showorder= (TextView) view.findViewById(R.id.frag_shouye_showorder);
+        classify.setOnClickListener(guideListener);
+        onebecomethirty.setOnClickListener(guideListener);
+        cheats.setOnClickListener(guideListener);
+        showorder.setOnClickListener(guideListener);
+
+
+        //底部商品
         ArrayList<Fragment> contentViews =new ArrayList<Fragment>();
-        FragmentGoods allGoods,tenGoods;
         allGoods =new FragmentGoods();
         tenGoods=new FragmentGoods();
         contentViews.add(allGoods);
         contentViews.add(tenGoods);
-        viewpager = (ViewPager) view.findViewById(R.id.frag_shouye_viewpager);
-        viewpager.setAdapter(new FragmentPagerada(getActivity().getSupportFragmentManager(),contentViews));
+        FragmentManager fm=getFragmentManager();
+        FragmentTransaction ft=fm.beginTransaction();
+        ft.add(R.id.frag_shouye_content_goods,allGoods);
+        ft.commit();
+
+//        viewpager = (ViewPager) view.findViewById(R.id.frag_shouye_viewpager);
+//        viewpager.setAdapter(new FragmentPagerada(getActivity().getSupportFragmentManager(),contentViews));
+
+
 
     }
+
+    @Override
+    public void onScroll(int scrollY) {
+        int mBuyLayout2ParentTop = Math.max(scrollY, normalalandten.getTop());
+        if (scrollY>=normalalandten.getTop()){
+            topallandten.setVisibility(View.VISIBLE);
+            topallandten.layout(0, mBuyLayout2ParentTop, topallandten.getWidth(), mBuyLayout2ParentTop + normalalandten.getHeight());
+        }else {
+            topallandten.setVisibility(View.GONE);
+        }
+
+
+    }
+
 
     class FragmentPagerada extends FragmentStatePagerAdapter{
         private ArrayList<Fragment> fragments;
@@ -97,6 +171,52 @@ public class FragmentShouYe extends Fragment {
         }
     }
 
+    private View.OnClickListener goodsKindsListener =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            FragmentManager fm=getFragmentManager();
+            FragmentTransaction ft=fm.beginTransaction();
+            if (v.getId()==R.id.frag_shouye_allgoods|v.getId()==R.id.frag_shouye_allgoods1){
+                allgoods.setTextColor(getResources().getColor(R.color.colorAccent));
+                allgoods1.setTextColor(getResources().getColor(R.color.colorAccent));
+                tengoods1.setTextColor(Color.BLACK);
+                tengoods.setTextColor(Color.BLACK);
+                ft.replace(R.id.frag_shouye_content_goods,allGoods);
+//                viewpager.setCurrentItem(0);
+            }else if (v.getId()==R.id.frag_shouye_tengoods|v.getId()==R.id.frag_shouye_tengoods1){
+                allgoods.setTextColor(Color.BLACK);
+                allgoods1.setTextColor(Color.BLACK);
+                tengoods.setTextColor(getResources().getColor(R.color.colorAccent));
+                tengoods1.setTextColor(getResources().getColor(R.color.colorAccent));
+                ft.replace(R.id.frag_shouye_content_goods,tenGoods);
+//                viewpager.setCurrentItem(1);
+            }
+            ft.commit();
+        }
+    };
+
+
+    private View.OnClickListener guideListener =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.frag_shouye_classify:
+                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.frag_shouye_onebecomthirty:
+                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.frag_shouye_cheats:
+                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.frag_shouye_showorder:
+                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 
 /*    private void initView(View view) {
