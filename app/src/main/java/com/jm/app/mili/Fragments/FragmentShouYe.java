@@ -1,6 +1,6 @@
 package com.jm.app.mili.Fragments;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jm.app.mili.R;
+import com.jm.app.mili.activities.BaskOrder;
+import com.jm.app.mili.activities.Classify;
+import com.jm.app.mili.activities.TestActivity;
 import com.jm.app.mili.widget.mScrollview;
 
 import java.util.ArrayList;
@@ -42,7 +45,8 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
     RecyclerView recyclearView;
 
     TextView allgoods,tengoods,allgoods1,tengoods1;//全部商品,十元专区
-    FragmentGoods allGoods,tenGoods;//全部商品,十元专区
+    FragmentGoodsall allGoods;//全部商品
+    FragmentGoodsten tenGoods;//十元专区
     TextView classify,onebecomethirty,cheats,showorder;//分类，1变30,中奖秘籍,晒单
 
     mScrollview mscrollView;
@@ -67,28 +71,14 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
 
 
     private void initView(View view){
-//        mscrollView = (mScrollview) view.findViewById(R.id.frag_shouye_scrollview);
-//        topGoodsKinds= (FrameLayout) view.findViewById(R.id.frag_shouye_xuanfu_goods);
-//        normalGoodsinds= (LinearLayout) view.findViewById(R.id.frag_shouye_xuanfu_goodsb);
-//
-//        topGoodsKinds.setVisibility(View.GONE);
-//        margintop= topGoodsKinds.getTop();
-//        mscrollView.setOnScrollListener(new mScrollview.OnScrollListener() {
-//            @Override
-//            public void onScroll(Context context, int x, int y, int oldx, int oldy) {
-//                if (y-oldy<=margintop){
-//                    topGoodsKinds.setVisibility(View.VISIBLE);
-//                }else {
-//                    topGoodsKinds.setVisibility(View.GONE);
-//                }
-//            }
-//        });
         parentView= (LinearLayout) view.findViewById(R.id.frag_shouye_parentview);
         childView = (LinearLayout) view.findViewById(R.id.frag_shouye_scrollview_child);
         childView.getParent().requestDisallowInterceptTouchEvent(true);
         topallandten= (FrameLayout) view.findViewById(R.id.frag_shouye_topallandten);
         normalalandten= (LinearLayout) view.findViewById(R.id.frag_shouye_normalallandten);
         mscrollView = (mScrollview) view.findViewById(R.id.frag_shouye_scrollview);
+        mscrollView.smoothScrollBy(0,topallandten.getTop());
+
         topallandten.setVisibility(View.GONE);
         mscrollView.setOnScrollListener(this);
         parentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -121,11 +111,11 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
 
 
         //底部商品
-        ArrayList<Fragment> contentViews =new ArrayList<Fragment>();
-        allGoods =new FragmentGoods();
-        tenGoods=new FragmentGoods();
-        contentViews.add(allGoods);
-        contentViews.add(tenGoods);
+//        ArrayList<Fragment> contentViews =new ArrayList<Fragment>();
+        allGoods =new FragmentGoodsall();
+        tenGoods=new FragmentGoodsten();
+//        contentViews.add(allGoods);
+//        contentViews.add(tenGoods);
         FragmentManager fm=getFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         ft.add(R.id.frag_shouye_content_goods,allGoods);
@@ -141,34 +131,16 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
     @Override
     public void onScroll(int scrollY) {
         int mBuyLayout2ParentTop = Math.max(scrollY, normalalandten.getTop());
-        if (scrollY>=normalalandten.getTop()){
+        if (scrollY>normalalandten.getBottom()){
             topallandten.setVisibility(View.VISIBLE);
-            topallandten.layout(0, mBuyLayout2ParentTop, topallandten.getWidth(), mBuyLayout2ParentTop + normalalandten.getHeight());
+//            topallandten.layout(0, mBuyLayout2ParentTop, topallandten.getWidth(), mBuyLayout2ParentTop + normalalandten.getHeight());
+        }else if (scrollY==normalalandten.getBottom()-5){
+            topallandten.setVisibility(View.GONE);
         }else {
             topallandten.setVisibility(View.GONE);
         }
 
 
-    }
-
-
-    class FragmentPagerada extends FragmentStatePagerAdapter{
-        private ArrayList<Fragment> fragments;
-
-        public FragmentPagerada(FragmentManager fm, ArrayList<Fragment> fragments) {
-            super(fm);
-            this.fragments = fragments;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
     }
 
     private View.OnClickListener goodsKindsListener =new View.OnClickListener() {
@@ -202,15 +174,23 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
             switch (v.getId()){
                 case R.id.frag_shouye_classify:
                     Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    getActivity().startActivity(new Intent(getContext(), Classify.class));
                     break;
                 case R.id.frag_shouye_onebecomthirty:
-                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "1元变30", Toast.LENGTH_SHORT).show();
+                    Intent intent1 =new Intent(getContext(),TestActivity.class);
+                    intent1.putExtra("text","1元变30");
+                    startActivity(intent1);
                     break;
                 case R.id.frag_shouye_cheats:
-                    Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "中奖秘籍", Toast.LENGTH_SHORT).show();
+                    Intent intent2 =new Intent(getContext(),TestActivity.class);
+                    intent2.putExtra("text","中奖秘籍");
+                    startActivity(intent2);
                     break;
                 case R.id.frag_shouye_showorder:
                     Toast.makeText(getActivity(), "分类", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getContext(),BaskOrder.class));
                     break;
                 default:
                     break;

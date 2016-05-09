@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
+    android:layout_height="wrap_content"
+    android:background="#EC666B"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:fitsSystemWindows="true"
     app:title=" "
     >
 <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
     android:id="@+id/toolbar_left_img"
-    android:src="@drawable/zt_icon_tougao_normal"/>
+    android:background="@mipmap/personlogo"
+    />
 
 
     <RelativeLayout

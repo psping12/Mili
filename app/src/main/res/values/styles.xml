@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -16,4 +16,27 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Base application theme. -->
+    <style name="baAppTheme" parent="@style/AppTheme">
+    </style>
+
+    <!--圆角button 登陆-->
+    <style name="circle_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/shap_circle_button</item>
+        <item name="android:padding">6.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <!--圆角button 登陆-->
+    <style name="circle_button_style_qqlogin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">6.0dip</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="edtext_no_xiahua">
+        <item name="android:background">@null</item>
+    </style>
 </resources>

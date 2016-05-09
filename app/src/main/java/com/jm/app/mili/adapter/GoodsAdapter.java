@@ -2,17 +2,18 @@ package com.jm.app.mili.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jm.app.mili.Bean.NormalGoodsInfo;
 import com.jm.app.mili.R;
+import com.jm.app.mili.activities.GoodDetailsActivity;
 import com.jm.app.mili.activities.TestActivity;
 
 import java.util.ArrayList;
@@ -43,12 +44,25 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.mViewHodlder
         holder.img.setBackgroundResource(goodsinfo.getImg());
         holder.total.setText(goodsinfo.getTotal_amount());
         holder.remains.setText(goodsinfo.getRemains());
-        holder.progressbar.setProgress((int)Integer.parseInt(goodsinfo.getTotal_amount())/Integer.parseInt(goodsinfo.getRemains()));
+
+        int total=Integer.parseInt(goodsinfo.getTotal_amount());
+        int remains =Integer.parseInt(goodsinfo.getRemains());
+//        holder.progressbar.setProgress((int)Integer.parseInt(goodsinfo.getTotal_amount())/Integer.parseInt(goodsinfo.getRemains()));
+        holder.progressbar.setProgress(remains*100/total);
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context, TestActivity.class);
+                Intent intent =new Intent(context, GoodDetailsActivity.class);
                 intent.putExtra("name",position);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, TestActivity.class);
+                intent.putExtra("text",position+"ButtonClick");
                 context.startActivity(intent);
             }
         });
@@ -65,12 +79,14 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.mViewHodlder
         TextView total,remains;
         ProgressBar progressbar;
         ImageView img;
+        Button bt;
         public mViewHodlder(View itemView) {
             super(itemView);
             total= (TextView) itemView.findViewById(R.id.goods_item_total_needs);
             remains = (TextView) itemView.findViewById(R.id.goods_item_remains);
             progressbar= (ProgressBar) itemView.findViewById(R.id.goods_item_progressbar);
             img= (ImageView) itemView.findViewById(R.id.goods_item_imgv);
+            bt= (Button) itemView.findViewById(R.id.goods_item_button);
         }
     }
 }

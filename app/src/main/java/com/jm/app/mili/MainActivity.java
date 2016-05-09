@@ -21,22 +21,27 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.jm.app.mili.Fragments.FragmentDiscovery;
+import com.jm.app.mili.Fragments.FragmentPerson;
 import com.jm.app.mili.Fragments.FragmentShouYe;
+import com.jm.app.mili.activities.BaseActivity;
+
+import org.xutils.view.annotation.ContentView;
+import org.xutils.x;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-public class MainActivity extends AppCompatActivity {
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
 
     private FrameLayout mContentView;
     private static FragmentShouYe fragmentShouYe;
     private ImageView main,newest,discover,mine;
-
-
 
 //   static  Handler handler =new Handler(){
 //        @Override
@@ -50,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        x.view().inject(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initView();
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
        main = (ImageView) findViewById(R.id.aty_main_botton_main);
        newest = (ImageView) findViewById(R.id.aty_main_botton_newset);
        discover = (ImageView) findViewById(R.id.aty_main_botton_discover);
-       mine = (ImageView) findViewById(R.id.aty_main_botton_mine);
+       mine = (ImageView) findViewById(R.id.aty_main_tab_mine);
 
         main.setOnClickListener(buttonListener);
         newest.setOnClickListener(buttonListener);
@@ -91,16 +98,29 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            FragmentManager fm =getSupportFragmentManager();
+            FragmentTransaction ft=fm.beginTransaction();
          switch (v.getId()){
              case R.id.aty_main_botton_main:
+                 fragmentShouYe =new FragmentShouYe();
+                 ft.replace(R.id.aty_main_contentview,fragmentShouYe);
                  break;
              case R.id.aty_main_botton_newset:
+                 Toast.makeText(MainActivity.this, "aty_main_botton_newset", Toast.LENGTH_SHORT).show();
+
                  break;
              case R.id.aty_main_botton_discover:
+                 FragmentDiscovery discovery =new FragmentDiscovery();
+                 ft.replace(R.id.aty_main_contentview,discovery);
                  break;
-             case R.id.aty_main_botton_mine:
+             case R.id.aty_main_tab_mine:
+                 FragmentPerson person =new FragmentPerson();
+                 ft.replace(R.id.aty_main_contentview,person);
+                 break;
+             default:
                  break;
          }
+            ft.commit();
             setBackGround(v.getId());
         }
     };

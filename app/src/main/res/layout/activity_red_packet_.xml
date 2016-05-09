@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/inc"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/lla"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@id/inc"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="可用" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="待派发" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="用完/过期" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llb"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="用夺宝币支付比红包更方便" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="去充值" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_red"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/llb"
+        android:layout_below="@+id/lla">
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_below="@id/fl_red"
+        android:background="#000" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_below="@id/lla"
+        android:background="#000" />
+</RelativeLayout>

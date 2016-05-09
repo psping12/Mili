@@ -132,7 +132,7 @@ public class Banner extends FrameLayout {
         dotViewsList.add(findViewById(R.id.v_dot5));
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setFocusable(true);
+//        viewPager.setFocusable(true);
 
         viewPager.setAdapter(new MyPagerAdapter());
         viewPager.addOnPageChangeListener(new MyPageChangeListener());

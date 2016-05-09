@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+ >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/circle_input"
+        android:hint="请输入手机号或邮箱账号"
+        android:id="@+id/ed_ID"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/circle_input"
+        android:hint="请输入密码"
+        android:id="@+id/ed_paword"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="注册账号"
+                android:textColor="@android:color/holo_blue_light"
+                android:id="@+id/tv_enroll"
+                />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="忘记密码"
+                android:textColor="@android:color/holo_blue_light"
+                android:id="@+id/tv_wj"
+
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        style="@style/circle_button_style"
+        android:text="登陆"
+        android:textColor="#ffffff"
+        android:id="@+id/tv_go"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="使用其他方式登陆" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/timg"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:id="@+id/tv_qq"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="29dp"
+                android:background="@mipmap/ddd"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="qq登陆"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/timg"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/tv_wx"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="29dp"
+                android:background="@mipmap/eee"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信登陆"
+                />
+        </LinearLayout>
+
+ <!--       <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:drawableLeft="@mipmap/ddd"
+            android:text="QQ登陆"
+            style="@style/circle_button_style_qqlogin"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/circle_button_style_qqlogin"
+            android:drawableLeft="@mipmap/eee"
+            android:text="微信登陆" />-->
+    </LinearLayout>
+</LinearLayout>

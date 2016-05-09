@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="5dip" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DAD9DB"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/xiangji"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="相机"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#DAD9DB" />
+
+        <Button
+            android:id="@+id/xiangce"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="相册"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/quxiao"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dip"
+            android:paddingBottom="10dip"
+            android:paddingTop="10dip"
+            android:text="取消"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/origionalImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>

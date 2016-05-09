@@ -65,7 +65,19 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:src="@mipmap/tab_mine_normal"
-        android:id="@+id/aty_main_botton_mine"
+        android:id="@+id/aty_main_tab_mine"
         />
+        <com.jm.app.mili.widget.ImageTextView
+            android:paddingTop="5dp"
+            android:paddingBottom="2dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:imagere="@mipmap/shaidan"
+            app:imagescaletype="center"
+            app:titletxt="hello"
+            app:titletxtsize="20sp"
+            />
+
     </LinearLayout>
 </LinearLayout>

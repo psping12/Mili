@@ -40,7 +40,6 @@
                 android:max="100"
                 android:maxHeight="48dp"
                 android:minHeight="48dp"
-                android:progress="0"
                 android:visibility="visible" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/btDuoBao_selected"
                 android:layout_centerInParent="true"
+                android:id="@+id/goods_item_button"
                 android:text="夺宝"/>
         </RelativeLayout>
     </LinearLayout>

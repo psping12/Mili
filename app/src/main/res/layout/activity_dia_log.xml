@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dip">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#383838"
+                    android:text="选择参与人次"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(购买越多几率越大)" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/xx"
+                android:id="@+id/back" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/person_page_car_item_sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:enabled="true"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:background="@drawable/paydig"
+                    android:textColor="#3CC0F1"
+                    android:textSize="16sp" />
+
+
+                <EditText
+                    android:id="@+id/person_page_car_item_num"
+                    android:layout_width="0dp"
+                    android:inputType="number"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                    android:background="@drawable/paydig"
+                    android:hint="1"
+                    android:gravity="center"
+                    android:textColor="#5FCBF7"
+                    android:textSize="16sp" />
+
+
+                <Button
+                    android:id="@+id/person_page_car_item_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="+"
+                    android:background="@drawable/paydig"
+                    android:textColor="#3CC0F1"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/fivw"
+                    android:layout_width="0dp"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/paydig"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/ten"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/paydig"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="10" />
+
+                <Button
+                    android:id="@+id/fifteen"
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:background="@drawable/paydig"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="15" />
+
+                <Button
+                    android:id="@+id/twenty"
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:background="@drawable/paydig"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:text="共1夺宝币" />
+
+                <Button
+                    android:padding="10dp"
+                    android:id="@+id/btn_yes"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/pay"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/b"
+                    android:layout_margin="5dp"
+                    android:text="确定" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

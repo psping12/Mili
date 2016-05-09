@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移动充值卡5000元" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_QH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="期号：" />
+
+                <TextView
+                    android:id="@+id/tv_QHnuber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="71654" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_CYZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="参与者：" />
+
+                <TextView
+                    android:id="@+id/tv_CYZname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6阿斯顿" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_GCY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="共参与了：" />
+
+                <TextView
+                    android:id="@+id/tv_GCYname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="122" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_XY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="幸运号码：" />
+
+                <TextView
+                    android:id="@+id/tv_XYnuber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="71654" />
+
+                <ImageView
+                    android:id="@+id/img_phoneYSE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_DH"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="已兑换欢乐豆" />
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_menu_camera" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

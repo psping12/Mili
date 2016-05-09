@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        android:orientation="vertical">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <com.jm.app.mili.widget.XCRoundImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:id="@+id/frag_person_head"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="QQ用户123456789"
+                android:textColor="@color/b"
+                android:textSize="17sp" />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:background="#CE8249"
+                android:text="签到"
+                android:id="@+id/frag_person_signin"
+                android:textColor="@color/b" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/b" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="夺宝币"
+                    android:textColor="@color/b" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="84dp"
+                android:layout_height="28dp"
+                android:background="#FF6100"
+                android:text="充值"
+                android:id="@+id/frag_person_recharge"
+                android:textColor="@color/b" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/b" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拍币"
+                    android:textColor="@color/b" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tv_yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/wdzj"
+            android:checked="true"
+            android:gravity="center"
+            android:text="中奖记录" />
+
+        <RadioButton
+            android:id="@+id/tv_snatch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:drawableTop="@drawable/wddb"
+            android:gravity="center"
+            android:text="夺宝记录" />
+
+        <RadioButton
+            android:id="@+id/tv_backOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/wdsd"
+            android:checked="false"
+            android:gravity="center"
+            android:text="晒单记录" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fragment_persion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</LinearLayout>
