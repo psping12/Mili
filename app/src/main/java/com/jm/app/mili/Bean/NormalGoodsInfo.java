@@ -4,15 +4,25 @@ package com.jm.app.mili.Bean;
  * Created by Administrator on 2016/4/29.
  */
 public class NormalGoodsInfo {
-    private int Img;// 图片
+    private String Img;// 图片
     private String Total_amount;//总需
     private String Remains; //剩余
 
-    public int getImg() {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;//說明
+
+    public String getImg() {
         return Img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         Img = img;
     }
 

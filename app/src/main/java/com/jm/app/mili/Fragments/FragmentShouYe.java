@@ -3,12 +3,16 @@ package com.jm.app.mili.Fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +24,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jm.app.mili.Bean.NormalGoodsInfo;
+import com.jm.app.mili.MainActivity;
 import com.jm.app.mili.R;
 import com.jm.app.mili.activities.BaskOrder;
 import com.jm.app.mili.activities.Classify;
 import com.jm.app.mili.activities.TestActivity;
+import com.jm.app.mili.activities.Wellcome;
+import com.jm.app.mili.adapter.GoodsAdapter;
 import com.jm.app.mili.widget.mScrollview;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
@@ -53,12 +62,78 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
     LinearLayout normalalandten,parentView,childView;
     FrameLayout topallandten;
 
+    RecyclerView recyclerView;
+    ArrayList<NormalGoodsInfo> data;
+    GoodsAdapter adapter;
+
     int margintop;
+    boolean SelectedWay =true;// 默认右边选中
+
+
+
+    SwipeRefreshLayout swipeRefreshLayout;//下拉刷新控件
+
+    static ArrayList<NormalGoodsInfo> datall,dataAlsl,dataten;
+
+    public static ArrayList<NormalGoodsInfo> getDatall() {
+        Random r =new Random();
+        boolean a = r.nextBoolean();
+        return a?dataAlsl:datall;
+    }
+
+
+    private Handler handler =new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    adapter.add(1);
+                    adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 2:
+
+                    swipeRefreshLayout.setRefreshing(false);
+                    break;
+            }
+
+        }
+    };
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View  view = inflater.inflate(R.layout.fragment_shouye, null);
+
+
+         dataAlsl=new ArrayList<NormalGoodsInfo>();
+        for (int i = 0; i < 10; i++) {
+            NormalGoodsInfo info = new NormalGoodsInfo();
+            info.setImg("http://pic32.nipic.com/20130829/12906030_124355855000_2.png");
+            info.setTotal_amount(i + 200 + "");
+            info.setRemains(i + 100 + "");
+            dataAlsl.add(info);
+        }
+
+        datall = new ArrayList<NormalGoodsInfo>();
+        for (int i = 0; i < 10; i++) {
+            NormalGoodsInfo info = new NormalGoodsInfo();
+            info.setImg("http://pic32.nipic.com/20130829/12906030_124355855000_2.png");
+            info.setTotal_amount(i + 200 + "");
+            info.setRemains(i + 100 + "");
+            datall.add(info);
+        }
+        dataten = new ArrayList<NormalGoodsInfo>();
+        for (int i = 0; i < 10; i++) {
+            NormalGoodsInfo info = new NormalGoodsInfo();
+            info.setImg("http://pic32.nipic.com/20130829/12906030_124355855000_2.png");
+            info.setTotal_amount(i + 200 + "");
+            info.setRemains(i + 100 + "");
+            dataten.add(info);
+        }
+
         initView(view);
         return view;
     }
@@ -71,6 +146,8 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
 
 
     private void initView(View view){
+
+
         parentView= (LinearLayout) view.findViewById(R.id.frag_shouye_parentview);
         childView = (LinearLayout) view.findViewById(R.id.frag_shouye_scrollview_child);
         childView.getParent().requestDisallowInterceptTouchEvent(true);
@@ -111,29 +188,35 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
 
 
         //底部商品
-//        ArrayList<Fragment> contentViews =new ArrayList<Fragment>();
-        allGoods =new FragmentGoodsall();
-        tenGoods=new FragmentGoodsten();
-//        contentViews.add(allGoods);
-//        contentViews.add(tenGoods);
-        FragmentManager fm=getFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.add(R.id.frag_shouye_content_goods,allGoods);
-        ft.commit();
+//        allGoods =new FragmentGoodsall();
+//        tenGoods=new FragmentGoodsten();
+//        FragmentManager fm=getFragmentManager();
+//        FragmentTransaction ft=fm.beginTransaction();
+//        ft.add(R.id.frag_shouye_content_goods,new FragmentGoodsall());
+//        ft.commit();
 
-//        viewpager = (ViewPager) view.findViewById(R.id.frag_shouye_viewpager);
-//        viewpager.setAdapter(new FragmentPagerada(getActivity().getSupportFragmentManager(),contentViews));
+        swipeRefreshLayout= (SwipeRefreshLayout) view.findViewById(R.id.aty_main_swipe);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(refreshListener);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.frag_shouye_recyckerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        data = Wellcome.getGoodsInfos();
+        adapter = new GoodsAdapter(data, getActivity());
+        recyclerView.setAdapter(adapter);
+
 
 
 
     }
+
+
 
     @Override
     public void onScroll(int scrollY) {
         int mBuyLayout2ParentTop = Math.max(scrollY, normalalandten.getTop());
         if (scrollY>normalalandten.getBottom()){
             topallandten.setVisibility(View.VISIBLE);
-//            topallandten.layout(0, mBuyLayout2ParentTop, topallandten.getWidth(), mBuyLayout2ParentTop + normalalandten.getHeight());
         }else if (scrollY==normalalandten.getBottom()-5){
             topallandten.setVisibility(View.GONE);
         }else {
@@ -149,23 +232,33 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
             FragmentManager fm=getFragmentManager();
             FragmentTransaction ft=fm.beginTransaction();
             if (v.getId()==R.id.frag_shouye_allgoods|v.getId()==R.id.frag_shouye_allgoods1){
-                allgoods.setTextColor(getResources().getColor(R.color.colorAccent));
-                allgoods1.setTextColor(getResources().getColor(R.color.colorAccent));
-                tengoods1.setTextColor(Color.BLACK);
-                tengoods.setTextColor(Color.BLACK);
-                ft.replace(R.id.frag_shouye_content_goods,allGoods);
-//                viewpager.setCurrentItem(0);
+                allSelected();
+                SelectedWay =true;
             }else if (v.getId()==R.id.frag_shouye_tengoods|v.getId()==R.id.frag_shouye_tengoods1){
-                allgoods.setTextColor(Color.BLACK);
-                allgoods1.setTextColor(Color.BLACK);
-                tengoods.setTextColor(getResources().getColor(R.color.colorAccent));
-                tengoods1.setTextColor(getResources().getColor(R.color.colorAccent));
-                ft.replace(R.id.frag_shouye_content_goods,tenGoods);
-//                viewpager.setCurrentItem(1);
+                tenSelected();
+                SelectedWay =false;
             }
             ft.commit();
         }
     };
+
+
+    private void allSelected(){
+        allgoods.setTextColor(getResources().getColor(R.color.colorAccent));
+        allgoods1.setTextColor(getResources().getColor(R.color.colorAccent));
+        tengoods1.setTextColor(Color.BLACK);
+        tengoods.setTextColor(Color.BLACK);
+        handler.sendEmptyMessage(1);
+    }
+
+    private void tenSelected(){
+        allgoods.setTextColor(Color.BLACK);
+        allgoods1.setTextColor(Color.BLACK);
+        tengoods.setTextColor(getResources().getColor(R.color.colorAccent));
+        tengoods1.setTextColor(getResources().getColor(R.color.colorAccent));
+
+        handler.sendEmptyMessage(2);
+    }
 
 
     private View.OnClickListener guideListener =new View.OnClickListener() {
@@ -195,6 +288,16 @@ public class FragmentShouYe extends Fragment implements mScrollview.OnScrollList
                 default:
                     break;
             }
+        }
+    };
+
+
+
+    //下拉刷新监听
+    SwipeRefreshLayout.OnRefreshListener refreshListener =new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            handler.sendEmptyMessage(1);
         }
     };
 

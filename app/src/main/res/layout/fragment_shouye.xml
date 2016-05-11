@@ -36,6 +36,13 @@
         </LinearLayout>
     </FrameLayout>
 
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/aty_main_swipe"
+        >
     <com.jm.app.mili.widget.mScrollview
         android:id="@+id/frag_shouye_scrollview"
         android:layout_width="match_parent"
@@ -54,7 +61,9 @@
 
                 <com.jm.app.mili.widget.Banner
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></com.jm.app.mili.widget.Banner>
+                    android:layout_height="match_parent">
+
+                </com.jm.app.mili.widget.Banner>
             </FrameLayout>
 
             <ImageView
@@ -205,17 +214,28 @@
                     android:text="10元专区" />
             </LinearLayout>
 
-
-            <FrameLayout
+          <!--  <FrameLayout
                 android:id="@+id/frag_shouye_content_goods"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!-- <android.support.v4.view.ViewPager
+                android:layout_height="wrap_content"
+                >
+                &lt;!&ndash; <android.support.v4.view.ViewPager
                      android:id="@+id/frag_shouye_viewpager"
                      android:layout_width="match_parent"
                      android:layout_height="match_parent">
-                 </android.support.v4.view.ViewPager>-->
-            </FrameLayout>
+                 </android.support.v4.view.ViewPager>&ndash;&gt;
+            </FrameLayout>-->
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frag_shouye_recyckerview"
+                />
         </LinearLayout>
     </com.jm.app.mili.widget.mScrollview>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>

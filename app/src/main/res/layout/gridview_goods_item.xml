@@ -1,104 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<ImageView
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="3"
+    android:layout_height="match_parent"
     android:gravity="center"
-    android:src="@mipmap/test_good"
-    android:id="@+id/goods_item_imgv"
-    />
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="1"
-     android:text="iPhone6s 64G"
-     android:gravity="center"
-     />
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/goods_item_imgv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:src="@mipmap/test_good" />
+
+    <TextView
+        android:id="@+id/tv_nameSY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="iPhone6s 64G" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="horizontal"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <ProgressBar
                 android:id="@+id/goods_item_progressbar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:max="100"
-                android:maxHeight="48dp"
-                android:minHeight="48dp"
+                android:maxHeight="24dp"
+                android:minHeight="24dp"
+                android:progress="0"
                 android:visibility="visible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                >
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="6480"
                     android:id="@+id/goods_item_total_needs"
-                    />
-                <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:text="5949"
+                    android:text="6480" />
+
+                <TextView
                     android:id="@+id/goods_item_remains"
-                    />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="5949" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
                 <TextView
+                    android:id="@+id/tv_zl"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:text="总需"/>
+                    android:text="总需" />
+
                 <TextView
+                    android:id="@+id/tv_sy"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_alignParentRight="true"
-                    android:text="剩余"/>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="剩余" />
             </LinearLayout>
 
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            >
+            android:layout_weight="3.5">
+
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/btDuoBao_selected"
-                android:layout_centerInParent="true"
                 android:id="@+id/goods_item_button"
-                android:text="夺宝"/>
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_margin="5dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/pay"
+                android:focusable="false"
+                android:text="夺宝" />
         </RelativeLayout>
     </LinearLayout>
 

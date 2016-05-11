@@ -4,18 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.jm.app.mili.Bean.NormalGoodsInfo;
+import com.jm.app.mili.Bean.Root;
+import com.jm.app.mili.Bean.Yunbuy;
 import com.jm.app.mili.MainActivity;
 import com.jm.app.mili.R;
 import com.jm.app.mili.Utils.SharedPreferencesUtil;
 import com.jm.app.mili.adapter.ViewPagerAdapter_wellcome;
 
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,6 +46,13 @@ public class Wellcome extends Activity implements ViewPager.OnPageChangeListener
     //记录当前选中位置
     private int currentIndex;
 
+
+    static ArrayList<NormalGoodsInfo> goodsInfos;
+
+    public static ArrayList<NormalGoodsInfo> getGoodsInfos(){
+        return goodsInfos;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +60,9 @@ public class Wellcome extends Activity implements ViewPager.OnPageChangeListener
 //         隐藏应用程序的标题栏，即当前activity的标题栏
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_welcome);
+        shouyeData();
         ShowGuideView();
+
     }
 
     private void ShowGuideView() {
@@ -158,5 +177,55 @@ public class Wellcome extends Activity implements ViewPager.OnPageChangeListener
 
     }
 
-    
+    public static void shouyeData() {
+
+        String result;
+        RequestParams params = new RequestParams("http://192.168.168.111/api/home/getindexdata");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onCancelled(CancelledException arg0) {
+
+            }
+
+            @Override
+            public void onError(Throwable arg0, boolean arg1) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String arg0) {
+                setGoodsInfos(arg0);
+
+            }
+        });
+    }
+
+    private static void setGoodsInfos(String result){
+        Log.e("------","---------刷新");
+        if (goodsInfos!=null)
+            goodsInfos.clear();
+
+        Yunbuy title1 = new Yunbuy();
+        List<Yunbuy> list = new ArrayList<Yunbuy>();
+
+        Gson gson = new Gson();
+        Root bean = gson.fromJson(result, Root.class);
+        goodsInfos =new ArrayList<NormalGoodsInfo>();
+        for (int i = 0; i < 10; i++) {
+            NormalGoodsInfo info =new NormalGoodsInfo();
+            title1 = bean.getData().getYunbuy().get(i);
+
+            info.setImg(title1.getImgurl_src());
+            info.setRemains(title1.getNeed_num());
+            info.setTotal_amount(title1.getEnd_num());
+            info.setTitle(title1.getTitle());
+            goodsInfos.add(info);
+        }
+    }
 }

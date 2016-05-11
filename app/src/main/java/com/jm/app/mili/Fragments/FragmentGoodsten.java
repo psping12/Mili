@@ -24,13 +24,13 @@ public class FragmentGoodsten extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_goods,null);
-        initView(view);
+//        initView(view);
         return view;
     }
 
     private void initView(View v) {
 
-        ArrayList<NormalGoodsInfo> data = new ArrayList<NormalGoodsInfo>();
+  /*      ArrayList<NormalGoodsInfo> data = new ArrayList<NormalGoodsInfo>();
 
             for (int i = 0; i < 3; i++) {
                 NormalGoodsInfo info = new NormalGoodsInfo();
@@ -41,7 +41,7 @@ public class FragmentGoodsten extends Fragment {
         }
         recyclerView = (RecyclerView) v.findViewById(R.id.frag_goods_recyckerview);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(new GoodsAdapter(data, getActivity()));
+        recyclerView.setAdapter(new GoodsAdapter(data, getActivity()));*/
     }
 
 

@@ -12,6 +12,11 @@
         <include layout="@layout/toolbar" />
     </FrameLayout>
 
+
+
+
+
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,8 +25,7 @@
         >
 
     </FrameLayout>
-    
-    
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -68,6 +72,7 @@
         android:id="@+id/aty_main_tab_mine"
         />
         <com.jm.app.mili.widget.ImageTextView
+            android:id="@+id/aty_mian_login"
             android:paddingTop="5dp"
             android:paddingBottom="2dp"
             android:layout_width="0dp"

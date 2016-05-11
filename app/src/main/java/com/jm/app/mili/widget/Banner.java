@@ -3,6 +3,7 @@ package com.jm.app.mili.widget;
 /**
  * Created by Administrator on 2016/5/3.
  */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -11,11 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -30,36 +29,41 @@ import android.widget.ImageView.ScaleType;
 import com.jm.app.mili.R;
 import com.jm.app.mili.activities.TestActivity;
 
+import org.xutils.common.util.DensityUtil;
+import org.xutils.image.ImageOptions;
+import org.xutils.x;
+
 /**
  * ViewPager实现的轮播图广告自定义视图，如京东首页的广告轮播图效果；
  * 既支持自动轮播页面也支持手势滑动切换页面
- * @author caizhiming
  *
+ * @author caizhiming
  */
 
 public class Banner extends FrameLayout {
+    ImageOptions imageOptions;
+
 
     //轮播图图片数量
-    private final static int IMAGE_COUNT = 5;
+    private final static int IMAGE_COUNT = 3;
     //自动轮播的时间间隔
     private final static int TIME_INTERVAL = 5;
     //自动轮播启用开关
     private final static boolean isAutoPlay = true;
-
     //自定义轮播图的资源ID
     private int[] imagesResIds;
     //放轮播图片的ImageView 的list
     private List<ImageView> imageViewsList;
     //放圆点的View的list
     private List<View> dotViewsList;
-
+    private ImageView img1, img2, img3;
     private ViewPager viewPager;
     //当前轮播页
-    private int currentItem  = 0;
+    private int currentItem = 0;
     //定时任务
     private ScheduledExecutorService scheduledExecutorService;
     //Handler
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -71,56 +75,62 @@ public class Banner extends FrameLayout {
     };
 
     public Banner(Context context) {
-        this(context,null);
+        this(context, null);
     }
+
     public Banner(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
     public Banner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initData();
         initUI(context);
-        if(isAutoPlay){
+        if (isAutoPlay) {
             startPlay();
         }
 
     }
+
     /**
      * 开始轮播图切换
      */
-    private void startPlay(){
+    private void startPlay() {
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutorService.scheduleAtFixedRate(new SlideShowTask(), 1, 4, TimeUnit.SECONDS);
     }
+
     /**
      * 停止轮播图切换
      */
-    private void stopPlay(){
+    private void stopPlay() {
         scheduledExecutorService.shutdown();
     }
+
     /**
      * 初始化相关Data
      */
-    private void initData(){
+    private void initData() {
+
+
         imagesResIds = new int[]{
                 R.mipmap.guide1,
                 R.mipmap.guide2,
                 R.mipmap.guide3,
-                R.mipmap.guide4,
-                R.mipmap.guide5,
 
         };
         imageViewsList = new ArrayList<ImageView>();
         dotViewsList = new ArrayList<View>();
 
     }
+
     /**
      * 初始化Views等UI
      */
-    private void initUI(Context context){
+    private void initUI(Context context) {
         LayoutInflater.from(context).inflate(R.layout.custom_banner, this, true);
-        for(int imageID : imagesResIds){
-            ImageView view =  new ImageView(context);
+        for (int imageID : imagesResIds) {
+            ImageView view = new ImageView(context);
             view.setImageResource(imageID);
             view.setScaleType(ScaleType.FIT_XY);
             imageViewsList.add(view);
@@ -128,8 +138,6 @@ public class Banner extends FrameLayout {
         dotViewsList.add(findViewById(R.id.v_dot1));
         dotViewsList.add(findViewById(R.id.v_dot2));
         dotViewsList.add(findViewById(R.id.v_dot3));
-        dotViewsList.add(findViewById(R.id.v_dot4));
-        dotViewsList.add(findViewById(R.id.v_dot5));
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 //        viewPager.setFocusable(true);
@@ -141,9 +149,10 @@ public class Banner extends FrameLayout {
 
     /**
      * 填充ViewPager的页面适配器
+     *
      * @author caizhiming
      */
-    private class MyPagerAdapter extends PagerAdapter{
+    private class MyPagerAdapter extends PagerAdapter {
         @Override
         public int getCount() {
             return imageViewsList.size();
@@ -156,16 +165,14 @@ public class Banner extends FrameLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-                imageViewsList.get(position).setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent =new Intent(getContext(),TestActivity.class);
-                        intent.putExtra("name",position);
-                        getContext().startActivity(intent);
-                    }
-                });
-
-
+            imageViewsList.get(position).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), TestActivity.class);
+                    intent.putExtra("name", position);
+                    getContext().startActivity(intent);
+                }
+            });
 
 
             container.addView(imageViewsList.get(position));
@@ -224,12 +231,14 @@ public class Banner extends FrameLayout {
 //        }
 
     }
+
     /**
      * ViewPager的监听器
      * 当ViewPager中页面的状态发生改变时调用
+     *
      * @author caizhiming
      */
-    private class MyPageChangeListener implements OnPageChangeListener{
+    private class MyPageChangeListener implements OnPageChangeListener {
 
         boolean isAutoPlay = false;
 
@@ -267,34 +276,37 @@ public class Banner extends FrameLayout {
             // TODO Auto-generated method stub
 
             currentItem = pos;
-            for(int i=0;i < dotViewsList.size();i++){
-                if(i == pos){
-                    ((View)dotViewsList.get(pos)).setBackgroundResource(R.mipmap.point_select);
-                }else {
-                    ((View)dotViewsList.get(i)).setBackgroundResource(R.mipmap.point_normal);
+            for (int i = 0; i < dotViewsList.size(); i++) {
+                if (i == pos) {
+                    ((View) dotViewsList.get(pos)).setBackgroundResource(R.mipmap.point_select);
+                } else {
+                    ((View) dotViewsList.get(i)).setBackgroundResource(R.mipmap.point_normal);
                 }
             }
         }
     }
 
     /**
-     *执行轮播图切换任务
-     *@author caizhiming
+     * 执行轮播图切换任务
+     *
+     * @author caizhiming
      */
-    private class SlideShowTask implements Runnable{
+    private class SlideShowTask implements Runnable {
 
         @Override
         public void run() {
             // TODO Auto-generated method stub
             synchronized (viewPager) {
-                currentItem = (currentItem+1)%imageViewsList.size();
+                currentItem = (currentItem + 1) % imageViewsList.size();
                 handler.obtainMessage().sendToTarget();
             }
         }
 
     }
+
     /**
      * 销毁ImageView资源，回收内存
+     *
      * @author caizhiming
      */
     private void destoryBitmaps() {
@@ -307,6 +319,25 @@ public class Banner extends FrameLayout {
                 drawable.setCallback(null);
             }
         }
+    }
+
+
+    public void initImage() {
+        imageOptions = new ImageOptions.Builder()
+                .setSize(DensityUtil.dip2px(120), DensityUtil.dip2px(120))
+                .setRadius(DensityUtil.dip2px(5))
+                // 如果ImageView的大小不是定义为wrap_content, 不要crop.
+                .setCrop(true) // 很多时候设置了合适的scaleType也不需要它.
+                // 加载中或错误图片的ScaleType
+                //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setLoadingDrawableId(R.mipmap.ic_launcher)
+                .setFailureDrawableId(R.mipmap.ic_launcher)
+                .build();
+        x.image().bind(img1, "http://192.168.168.111/upload/images/gallery/6/o/241_temp-640-310-2.jpg", imageOptions);
+    }
+    class ViewHoder{
+        private ImageView imgview;
     }
 
 }
